@@ -12,7 +12,7 @@ sealed interface Route {
         val routeMap = mapOf<KClass<out Route>, String>(
             List::class to List.rawRoute,
             Favorite::class to Favorite.rawRoute,
-            Detail::class to Detail("").rawRoute
+            Detail::class to Detail("").rawRoute,
         )
     }
 

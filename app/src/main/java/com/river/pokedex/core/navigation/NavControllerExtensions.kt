@@ -8,7 +8,7 @@ fun NavController.navigateTo(
     route: KClass<out Route>,
     vararg args: Pair<String, String>,
     popUpToRoute: String? = null,
-    inclusive: Boolean = false
+    inclusive: Boolean = false,
 ) {
     val baseRoute = Route.routeMap[route] ?: error("Route not found for $route")
 
