@@ -12,8 +12,6 @@
 * 🧩 Paginated list of Pokémon
 * 📄 Detailed Pokémon information
 * ⭐ Favorite and unfavorite Pokémon
-* 📡 Network connectivity observation
-* 🛎️ Custom Snackbar for notifications
 
 ---
 
