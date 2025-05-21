@@ -26,7 +26,7 @@
 | Networking           | Retrofit + kotlinx.serialization       |
 | Image Loading        | Coil                                   |
 | Async & Stream       | Kotlin Coroutines + Flow               |
-| UI Effects           | Compose Shimmer, AnimatedVisibility... |
+| Local Storage        | Room                                   |
 
 ---
 
