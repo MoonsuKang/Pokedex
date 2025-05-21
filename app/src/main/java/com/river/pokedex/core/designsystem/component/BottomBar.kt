@@ -26,25 +26,25 @@ fun <Tab : BottomTab> PokeDexBottomBar(
     bottomTabs: List<Tab>,
     currentTab: Tab?,
     onClickTab: (tab: Tab) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-    Row(modifier = modifier.background(PokeDexTheme.colors.white)) {
+    Row(modifier = modifier.background(PokeDexTheme.colors.gray01)) {
         bottomTabs.forEach { tab ->
             val isSelected = currentTab == tab
             Button(
                 onClick = { onClickTab(tab) },
                 modifier = Modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = PokeDexTheme.colors.white,
+                    containerColor = PokeDexTheme.colors.gray01,
                     contentColor = Color.Transparent,
-                    disabledContainerColor = PokeDexTheme.colors.white,
-                    disabledContentColor = PokeDexTheme.colors.white
+                    disabledContainerColor = PokeDexTheme.colors.gray01,
+                    disabledContentColor = PokeDexTheme.colors.gray01,
                 ),
-                elevation = null
+                elevation = null,
             ) {
                 PokeDexBottomTab(
                     bottomTab = tab,
-                    isSelected = isSelected
+                    isSelected = isSelected,
                 )
             }
         }
@@ -55,30 +55,30 @@ fun <Tab : BottomTab> PokeDexBottomBar(
 private fun PokeDexBottomTab(
     isSelected: Boolean,
     bottomTab: BottomTab,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
-    val iconColor = if (isSelected) PokeDexTheme.colors.black else PokeDexTheme.colors.gray03
-    val textColor = if (isSelected) PokeDexTheme.colors.black else PokeDexTheme.colors.gray03
-    val backgroundColor = if (isSelected) PokeDexTheme.colors.lightBlue else Color.Transparent
+    val iconColor = if (isSelected) PokeDexTheme.colors.white else PokeDexTheme.colors.gray06
+    val textColor = if (isSelected) PokeDexTheme.colors.white else PokeDexTheme.colors.gray06
+    val backgroundColor = if (isSelected) PokeDexTheme.colors.red.copy(alpha = 0.7f) else Color.Transparent
 
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Box(
             modifier = Modifier
                 .size(36.dp)
                 .background(
                     color = backgroundColor,
-                    shape = CircleShape
+                    shape = CircleShape,
                 ),
-            contentAlignment = Alignment.Center
+            contentAlignment = Alignment.Center,
         ) {
             Icon(
                 painter = painterResource(bottomTab.icon),
                 contentDescription = null,
-                tint = iconColor
+                tint = iconColor,
             )
         }
         Text(
@@ -86,7 +86,7 @@ private fun PokeDexBottomTab(
             style = PokeDexTheme.typography.body2SemiBold,
             fontSize = 12.sp,
             color = textColor,
-            modifier = Modifier.padding(top = 6.dp)
+            modifier = Modifier.padding(top = 6.dp),
         )
     }
 }

@@ -1,6 +1,5 @@
 package com.river.pokedex.core.designsystem.component
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
@@ -16,6 +15,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -31,42 +31,40 @@ fun PokeDexTopBarWithBackButton(
     title: String = "",
     onBackClick: () -> Unit = {},
     windowInsets: WindowInsets = TopAppBarDefaults.windowInsets,
-    trailingComponent: @Composable RowScope.() -> Unit = {}
+    trailingComponent: @Composable RowScope.() -> Unit = {},
 ) {
     Column {
         CenterAlignedTopAppBar(
             modifier = modifier
-                .fillMaxWidth()
-                .background(PokeDexTheme.colors.white)
-                .padding(horizontal = 12.dp),
+                .fillMaxWidth(),
             title = {
                 Text(
                     text = title,
                     style = PokeDexTheme.typography.head3,
-                    color = PokeDexTheme.colors.blue,
+                    color = PokeDexTheme.colors.white,
                     textAlign = TextAlign.Center,
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
                 )
             },
             actions = trailingComponent,
             navigationIcon = {
                 IconButton(
                     onClick = onBackClick,
-                    modifier = Modifier.size(32.dp)
+                    modifier = Modifier.size(32.dp),
                 ) {
                     Icon(
                         painter = painterResource(R.drawable.ic_back),
                         contentDescription = null,
-                        tint = PokeDexTheme.colors.blue
+                        tint = PokeDexTheme.colors.white,
                     )
                 }
             },
             colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                containerColor = PokeDexTheme.colors.white
+                containerColor = Color.Transparent,
             ),
             windowInsets = windowInsets,
-            expandedHeight = 60.dp
+            expandedHeight = 60.dp,
         )
     }
 }
@@ -77,7 +75,7 @@ fun PokeDexTopBar(
     modifier: Modifier = Modifier,
     title: String = "",
     windowInsets: WindowInsets = TopAppBarDefaults.windowInsets,
-    trailingComponent: @Composable RowScope.() -> Unit = {}
+    trailingComponent: @Composable RowScope.() -> Unit = {},
 ) {
     TopAppBar(
         modifier = modifier.fillMaxWidth(),
@@ -85,18 +83,18 @@ fun PokeDexTopBar(
             Text(
                 text = title,
                 style = PokeDexTheme.typography.head3,
-                color = PokeDexTheme.colors.blue,
+                color = PokeDexTheme.colors.white,
                 textAlign = TextAlign.Start,
                 maxLines = 1,
-                overflow = TextOverflow.Ellipsis
+                overflow = TextOverflow.Ellipsis,
             )
         },
         actions = trailingComponent,
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = PokeDexTheme.colors.white
+            containerColor = PokeDexTheme.colors.red.copy(alpha = 0.9f),
         ),
         windowInsets = windowInsets,
-        expandedHeight = 60.dp
+        expandedHeight = 60.dp,
     )
 }
 
@@ -106,7 +104,7 @@ private fun PokeDexTopBarPreview() {
     PokeDexTheme {
         PokeDexTopBar(
             title = "타이틀",
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp),
         )
     }
 }
@@ -118,7 +116,7 @@ private fun PokeDexTopBarWithBackButtonPreview() {
         PokeDexTopBarWithBackButton(
             title = "타이틀",
             onBackClick = {},
-            modifier = Modifier.padding(16.dp)
+            modifier = Modifier.padding(16.dp),
         )
     }
 }

@@ -14,7 +14,7 @@ import com.river.pokedex.core.designsystem.theme.PokeDexTheme
 fun BoxScope.PokeDexCircularProgress() {
     CircularProgressIndicator(
         modifier = Modifier.align(alignment = Alignment.Center),
-        color = PokeDexTheme.colors.blue
+        color = PokeDexTheme.colors.blue,
     )
 }
 

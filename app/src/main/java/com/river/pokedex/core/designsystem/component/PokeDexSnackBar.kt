@@ -18,7 +18,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.river.pokedex.core.designsystem.theme.PokeDexTheme
 import kotlinx.coroutines.CoroutineScope
@@ -32,47 +31,32 @@ fun PokeDexSnackBar(
     label: String,
     onAction: () -> Unit,
     shape: Shape = RoundedCornerShape(6.dp),
-    containerColor: Color = PokeDexTheme.colors.black
+    containerColor: Color = PokeDexTheme.colors.black,
 ) {
     Surface(
         modifier = modifier,
         shape = shape,
         color = containerColor,
-        shadowElevation = 6.dp
+        shadowElevation = 6.dp,
     ) {
         Row(
             modifier = Modifier
                 .padding(horizontal = 14.dp, vertical = 12.dp),
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
                 text = message,
                 color = PokeDexTheme.colors.white,
-                style = PokeDexTheme.typography.detail1SemiBold
+                style = PokeDexTheme.typography.detail1SemiBold,
             )
             Spacer(modifier = Modifier.weight(1f))
             Text(
                 text = label,
                 color = PokeDexTheme.colors.gray06,
                 style = PokeDexTheme.typography.detail2SemiBold,
-                modifier = Modifier.clickable(onClick = onAction)
+                modifier = Modifier.clickable(onClick = onAction),
             )
         }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PokeDexSnackBarPreview() {
-    PokeDexTheme {
-        PokeDexSnackBar(
-            modifier = Modifier
-                .padding(start = 20.dp, end = 20.dp, bottom = 12.dp)
-                .fillMaxWidth(),
-            message = "이미 저장된 포켓몬",
-            label = "확인",
-            onAction = {}
-        )
     }
 }
 
@@ -80,22 +64,18 @@ suspend fun showCustomSnackBar(
     scope: CoroutineScope,
     snackBarHostState: SnackbarHostState,
     message: String,
-    actionLabel: String? = null,
     iconRes: Int? = null,
-    bottomPadding: Dp = 12.dp,
     durationMillis: Long = 2000L,
     onDismiss: () -> Unit = {},
-    onAction: () -> Unit = {}
+    onAction: () -> Unit = {},
 ): SnackbarResult {
     val result = with(scope) {
         launch {
             snackBarHostState.showSnackbar(
                 CustomSnackBarVisuals(
                     message = message,
-                    actionLabel = actionLabel,
                     iconRes = iconRes,
-                    bottomPadding = bottomPadding
-                )
+                ),
             )
         }.let { job ->
             launch {
@@ -124,5 +104,19 @@ data class CustomSnackBarVisuals(
     override val withDismissAction: Boolean = false,
     override val duration: SnackbarDuration = SnackbarDuration.Short,
     val iconRes: Int? = null,
-    val bottomPadding: Dp = 12.dp
 ) : SnackbarVisuals
+
+@Preview(showBackground = true)
+@Composable
+fun PokeDexSnackBarPreview() {
+    PokeDexTheme {
+        PokeDexSnackBar(
+            modifier = Modifier
+                .padding(start = 20.dp, end = 20.dp, bottom = 12.dp)
+                .fillMaxWidth(),
+            message = "이미 저장된 포켓몬",
+            label = "확인",
+            onAction = {},
+        )
+    }
+}

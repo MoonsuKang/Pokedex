@@ -41,7 +41,7 @@ fun PokemonCard(
     isFavorite: Boolean = false,
     isLoading: Boolean = false,
     surfaceHeight: Dp = 40.dp,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
 ) {
     Card(
         modifier = modifier
@@ -50,24 +50,24 @@ fun PokemonCard(
         shape = RoundedCornerShape(14.dp),
         colors = CardDefaults.cardColors(
             containerColor = backgroundColor,
-            contentColor = backgroundColor
+            contentColor = backgroundColor,
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
     ) {
         Box(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
         ) {
             if (isLoading) {
                 SkeletonBox(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(bottom = surfaceHeight)
-                        .aspectRatio(1f)
+                        .aspectRatio(1f),
                 )
             } else {
                 val painter = rememberAsyncImagePainter(
                     model = imageUrl,
-                    error = painterResource(R.drawable.error)
+                    error = painterResource(R.drawable.error),
                 )
 
                 Image(
@@ -78,7 +78,7 @@ fun PokemonCard(
                         .padding(bottom = surfaceHeight)
                         .fillMaxSize(0.7f)
                         .aspectRatio(1f),
-                    contentScale = ContentScale.Fit
+                    contentScale = ContentScale.Fit,
                 )
             }
 
@@ -87,19 +87,19 @@ fun PokemonCard(
                     .fillMaxWidth()
                     .height(surfaceHeight)
                     .align(Alignment.BottomCenter),
-                color = PokeDexTheme.colors.gray08
+                color = Color.Transparent,
             ) {
                 Box(
                     modifier = Modifier.fillMaxSize(),
-                    contentAlignment = Alignment.Center
+                    contentAlignment = Alignment.Center,
                 ) {
                     Text(
                         text = pokemonName,
-                        color = PokeDexTheme.colors.black,
+                        color = PokeDexTheme.colors.white,
                         textAlign = TextAlign.Center,
                         style = PokeDexTheme.typography.body1SemiBold,
                         maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
                     )
                 }
             }
@@ -112,7 +112,7 @@ fun PokemonCard(
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .padding(8.dp)
-                        .size(24.dp)
+                        .size(24.dp),
                 )
             }
         }
@@ -122,13 +122,13 @@ fun PokemonCard(
 @Composable
 fun ErrorText(
     modifier: Modifier = Modifier,
-    text: String
+    text: String,
 ) {
     Text(
         text = text,
         color = PokeDexTheme.colors.red,
         style = PokeDexTheme.typography.body1SemiBold,
-        modifier = modifier.padding(16.dp)
+        modifier = modifier.padding(16.dp),
     )
 }
 
@@ -143,7 +143,7 @@ private fun PokemonCardPreview() {
             backgroundColor = PokeDexTheme.colors.white,
             pokemonName = "Pikachu",
             imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
-            isFavorite = true
+            isFavorite = true,
         )
     }
 }

@@ -1,8 +1,12 @@
 package com.river.pokedex.core.designsystem.component
 
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -26,43 +30,47 @@ fun PokeDexButton(
     label: String,
     modifier: Modifier = Modifier,
     icon: ImageVector,
-    containerColor: Color = PokeDexTheme.colors.mainGreen,
-    contentColor: Color = PokeDexTheme.colors.black,
-    pressedContainerColor: Color = PokeDexTheme.colors.mainGreen.copy(alpha = 0.8f),
+    contentColor: Color = PokeDexTheme.colors.white,
     pressedContentColor: Color = PokeDexTheme.colors.gray07,
+    borderColor: Color = PokeDexTheme.colors.white,
+    pressedBorderColor: Color = PokeDexTheme.colors.gray07,
     onClick: () -> Unit,
-    shape: Shape = RoundedCornerShape(16.dp)
+    shape: Shape = RoundedCornerShape(16.dp),
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
 
-    val currentContainerColor = if (isPressed) pressedContainerColor else containerColor
     val currentContentColor = if (isPressed) pressedContentColor else contentColor
+    val currentBorderColor = if (isPressed) pressedBorderColor else borderColor
 
     Button(
         onClick = onClick,
         shape = shape,
-        colors = ButtonDefaults.buttonColors(
-            containerColor = currentContainerColor,
-            contentColor = currentContentColor
-        ),
         interactionSource = interactionSource,
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
+            .fillMaxWidth()
+            .border(BorderStroke(2.dp, currentBorderColor), shape),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color.Transparent,
+            contentColor = currentContentColor,
+        ),
+        elevation = ButtonDefaults.buttonElevation(0.dp),
     ) {
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = currentContentColor
+            tint = currentContentColor,
         )
+        Spacer(modifier = Modifier.width(8.dp))
         Text(
             text = label,
             color = currentContentColor,
-            style = PokeDexTheme.typography.head3
+            style = PokeDexTheme.typography.head3,
         )
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, backgroundColor = 0xFF000000)
 @Composable
 private fun PokeDexButtonPreview() {
     PokeDexTheme {
@@ -70,7 +78,7 @@ private fun PokeDexButtonPreview() {
             label = "버튼",
             icon = Icons.Default.Add,
             onClick = {},
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         )
     }
 }

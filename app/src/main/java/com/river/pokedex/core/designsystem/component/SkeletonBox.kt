@@ -14,15 +14,15 @@ import com.valentinilk.shimmer.shimmer
 
 @Composable
 fun SkeletonBox(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier
             .shimmer()
             .background(
                 color = PokeDexTheme.colors.gray01.copy(alpha = 0.6f),
-                shape = RoundedCornerShape(14.dp)
-            )
+                shape = RoundedCornerShape(14.dp),
+            ),
     )
 }
 
@@ -33,7 +33,7 @@ fun SkeletonBoxPreview() {
         SkeletonBox(
             modifier = Modifier
                 .height(100.dp)
-                .fillMaxWidth()
+                .fillMaxWidth(),
         )
     }
 }
