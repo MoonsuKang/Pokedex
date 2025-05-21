@@ -26,6 +26,7 @@ android {
         versionName = "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         buildConfigField("String", "BASE_URL", "\"${properties["base.url"]}\"")
+        buildConfigField("String", "POKEMON_SPRITE_BASE_URL", "\"${properties["pokemon.splite.base.url"]}\"")
     }
 
     buildTypes {
